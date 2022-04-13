@@ -92,3 +92,23 @@ const [상태 값 저장 변수, 상태 값 갱신 함수] = useState(상태 초
 JSX에서 HTML의 class, for과 같은 문법 용어는 사용 못한다.
 <br>
 className 혹은 htmlFor과 같이 사용해야함.
+
+### 220413
+
+React에서 함수를 다른 함수에서 불러올 수 있는데
+<br>
+<MinutesToHours />와 같이 표시하여 불러올 수 있다.
+
+html 태그 중 select와 option 태그를 활용하여 원하는 UI를 가져오도록 하였다.
+<br>
+이후 App 함수에 useState 함수를 새롭게 만들어 각 option들의 value 값을 받아와
+<br>
+value값에 맞는 option. 즉 UI를 가져오도록 하였다.
+
+그리고 React를 사용할 때 자바스크립트 문법을 사용하고 싶다면
+<br>
+{} 중괄호를 활용하여 사용할 수 있다.
+<br>
+만약 중괄호를 활용하지 않는다면 html 화면에 text로 표시된다.
+
+이후 Km to Mile을 숙제로 내주셔서 만들어 볼 예정이다.
