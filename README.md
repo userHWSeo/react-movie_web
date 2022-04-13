@@ -112,3 +112,4 @@ value값에 맞는 option. 즉 UI를 가져오도록 하였다.
 만약 중괄호를 활용하지 않는다면 html 화면에 text로 표시된다.
 
 이후 Km to Mile을 숙제로 내주셔서 만들어 볼 예정이다.
+Km to Mile 완료.

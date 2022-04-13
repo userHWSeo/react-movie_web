@@ -26,12 +26,12 @@
             <div>
                 <div>
                     <label htmlFor="amount">Minutes</label>
-                    <input value={flipped ? amount * 60 : amount} id="amount" placeholder="Minutes" type="Number" onChange={onChange} disabled={flipped === true} />
+                    <input value={flipped ? amount * 60 : amount} id="amount" placeholder="Minutes" type="Number" onChange={onChange} disabled={flipped} />
                 </div>
 
                 <div>
                     <label htmlFor="hours">Hours</label>
-                    <input value={flipped ? amount : Math.round(amount / 60)} id="hours" placeholder="Hours" type="Number" disabled={flipped === false} />
+                    <input value={flipped ? amount : Math.round(amount / 60)} id="hours" placeholder="Hours" type="Number" onChange={onChange} disabled={!flipped} />
                 </div>
                 <button onClick={reset}>Reset</button>
                 <button onClick={onFlip}>Flip</button>
@@ -39,7 +39,33 @@
         )
     };
     function KmToMiles() {
-        return <h3>KM 2 M</h3>
+        const [length, setLength] = React.useState(0);
+        const [flipped, onFlipped] = React.useState(false);
+        const onChange = (event) => {
+            setLength(event.target.value)
+        };
+        const reset = () => {
+            setLength(0)
+        };
+        const onFlip = (event) => {
+              onFlipped((current) => !current)
+        };
+        return (
+            <div>
+                <div>
+                    <h3>Km</h3>
+                    <input id="km" value={flipped ? length * 1.609 : length} placeholder="Km" type="Number" onChange={onChange}  disabled={flipped} />    
+                </div>
+                <div>
+                    <h3>Miles</h3>
+                    <input id="miles" value={flipped ? length : length / 1.609} placeholder="Miles" type="Number" onChange={onChange} disabled={!flipped} />
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
+
+                </div>
+
+        )
 
     }
     function App() {
