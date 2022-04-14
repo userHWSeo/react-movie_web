@@ -113,3 +113,70 @@ value값에 맞는 option. 즉 UI를 가져오도록 하였다.
 
 이후 Km to Mile을 숙제로 내주셔서 만들어 볼 예정이다.
 Km to Mile 완료.
+
+### 220414
+
+설정가능한 컴포넌트를 배움.
+<br>
+마크업이나 스타일을 최대한 재사용할 수 있도록 함.
+<br>
+props의 사용으로 인자를 줄 수 있음.
+<br>
+자바스크립트에서 event.target의 느낌(?)
+<br>
+props.prop이름 으로 불러올 수 있으며, shortcut을 주로 사용한다고 함.
+<br>
+굳이 Object에서 꺼낼 필요가 없기 때문
+<br>
+<br>
+re-Render을 할 때 불필요한 렌더링이 들어 간 경우 React.memo로 방지할 수 있음.
+<br>
+부모 컴포넌트를 변경 시 자식 컴포넌트도 re-render가 일어나면 불필요한 렌더링을 방지해준다.
+<br>
+<br>
+propTypes로 prop의 type을 경고해준다.
+<br>
+이는 props에서 우리가 실수하는 부분을 잡아내기 위함이며, props의 기본값을 정할 수도 있다.
+<br>
+또한 isRequired를 사용하여 필수조건으로 만들 수도 있다.
+<br>
+<br>
+<br>
+<br>
+React 설치
+
+$ npx create-react-app my-app
+<br>
+<br>
+<br>
+<br>
+
+React설치 이후 npm start를 실행하면 react가 실행된다.
+<br>
+<br>
+컴포넌트 당 1개의 js파일을 가질 수 있으며 모듈화가 가능하다.
+<br>
+컴포넌트 별 스타일은 .module.css 파일을 생성하고 import를 사용하여 불러온다.
+<br>
+<br>
+스타일은 className이나 id를 사용하고 import 이름과 함께 property에 적용한다.
+<br>
+<br>
+예)
+<br>
+import styles from "./App.module.css";
+<br>
+
+div className={styles.tomato}
+<br>
+<br>
+<br>
+React를 설치하여 실행하게 되면 script로 import 할 필요가 없고 useState와 같이 Hook 사용 시 앞에 React.을 붙일 필요가 없어짐.
+<br>
+useEffect를 사용해봄.
+<br>
+코드를 실행하는데 있어 불필요한 리렌더링을 제어해준다.
+<br>
+useEffect(실행 함수, [ 디펜던시 ])와 같이 사용하며 1번만 렌더링하고 싶은 경우 디펜던시를 빈칸으로 두고, 디펜던시가 변함에 따라 실행하고 싶으면 디펜던시를 넣어줄 수 있다.
+<br>
+디펜던시는 여러개 넣어 줄 수 있음.
