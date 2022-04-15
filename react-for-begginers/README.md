@@ -203,3 +203,14 @@ ToDo List에 DeleteBtn 구현
 <br>
 https://artjunior.tistory.com/56
 <br>
+
+### 220416
+
+Coin Tracker 제작
+<br>
+원하는 USD로 얼마만큼의 암호화폐를 살 수 있는지 구현
+<br>
+수업 진행을 위해 해당 내용을 블로그에 업로드 후 삭제
+<br>
+https://artjunior.tistory.com/57
+<br>

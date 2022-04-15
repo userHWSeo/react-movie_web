@@ -1,65 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [toDo, setToDo] = useState("");
-  const [toDos, setToDos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  const [change, setChange] = useState([]);
+  const [seed, setSeed] = useState(0);
+  // fetch를 통해 암호화폐의 데이터를 불러옴.
+  //json형태로 불러온 후 setCoins에 json을 넣음
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json())
+      .then((json) => {
+        setCoins(json);
+        setLoading(false);
+      });
+  }, []);
+  // onClick은 select에 주고 option tag를 클릭 시 반응 하도록함
+  // option tag를 클릭 시 암호화폐의 USD 환율을 받아오도록함
+  const onClick = (event) => {
+    setChange(event.target.value);
+  };
+  // input tag에서 원하는 USD(value)를 받아옴
   const onChange = (event) => {
-    setToDo(event.target.value);
+    setSeed(event.target.value);
   };
-  const onSubmit = (event) => {
-    // onSubmit을 할 때 마다 브라우저가 새로고침되어 preventDefault를 주었다.
-    event.preventDefault();
-    // 만약 toDo가 없다면 있을 때까지 리턴해준다. 함수가 동작하지 않도록.
-    if (toDo === "") {
-      return;
-    }
-    // submit 후 input의 value를 비우기 위해 setToDo를 비워준다.
-    setToDo("");
-    // input에서 받은 value를 []배열 안에 넣어주고 기존의 toDo는 뒤에 두도록한다.
-    // current앞에 '...'을 두지 않으면 [Array(x), toDo]로 표시되기 때문에 Array를 열어주는 역활을 한다.
-    setToDos((currentArray) => [...currentArray, toDo]);
-    console.log(toDos);
-  };
-  // # delete 버튼 구현
-  // onClick={deleteBtn}이 아닌 함수를 사용하여 index를 넣은 이유는 "바로 실행"되지 않고 클릭을 기다리기 위해 쓰임
-  // filter함수의 기본 구문은 다음과 같다.
-  // arr.filter(callback(element[, index[, array]])[, thisArg])
-  // 이 중 element엔 item을 index에는 삭제하고 싶은 button과 li의 index(toDoIndex)를 넣어준다.
-  // 이후 요청받은 index와 toDoIndex 같을 경우만 제외한다.
-  // * !== 를 사용한 이유 : filter 함수는 ~이 아닌 요소(!==)만 반환하기 위해
-  const deleteBtn = (index) => {
-    setToDos(toDos.filter((item, toDoIndex) => index !== toDoIndex));
-  };
+
+  // map()함수를 활용하여 Object들 중 원하는 요소들을 받아옴
+  // 원하는 USD로 얼마만큼의 암호화폐를 살 수 있는지 구현
+  // 처음 실행 시 option의 coin.quotes.USD.price가 바로 받아지지 않음
+  // 위의 에러를 해결 하기 위해 option의 최상단에 새로운 option을 추가하였고
+  // 삼항식을 이용하여 'Click the Coin !' 일 땐 span을 비워둔다.
   return (
     <div>
-      <h1>My To Dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={onChange}
-          value={toDo}
-          type="text"
-          placeholder="Write your to do..."
-        />
-        <button>Add To Do</button>
-      </form>
-      <hr />
-      {toDos.map((item, index) => (
-        <ul>
-          <li key={index}>
-            {item}
-            <button
-              key={index}
-              onClick={() => {
-                deleteBtn(index);
-              }}
-            >
-              ❌
-            </button>
-          </li>
-        </ul>
-      ))}
+      <h1>The Coins ! {loading ? "" : `${coins.length}`}</h1>
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
+        <select onClick={onClick}>
+          <option>Click the Coin !</option>
+          {coins.map((coin) => (
+            <option value={coin.quotes.USD.price}>
+              {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
+            </option>
+          ))}
+        </select>
+      )}
+      <div>
+        <input onChange={onChange} placeholder="How much do you have ?"></input>
+        <br></br>
+        <span>
+          {change === "Click the Coin !" || seed === 0
+            ? ""
+            : `You can exchange ${seed / change}`}
+        </span>
+      </div>
     </div>
   );
 }
-
 export default App;
