@@ -192,3 +192,14 @@ cleanup은 컴포넌트가 없어 질때 어떠한 결과를 보내고 싶어하
 사실 실제 앱 개발 시 크게 사용하지 않는다고 한다.
 <br>
 허나 필요로하는 상황이 있을 수 있으므로 알아두는 것 이 좋음.
+
+### 220415
+
+ToDo List 제작
+<br>
+ToDo List에 DeleteBtn 구현
+<br>
+수업 진행을 위해 해당 내용을 블로그에 업로드 후 삭제
+<br>
+https://artjunior.tistory.com/56
+<br>
